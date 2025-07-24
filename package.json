@@ -1,0 +1,43 @@
+{
+  "name": "halloween-travel-itinerary",
+  "version": "1.0.0",
+  "description": "A simple, interactive travel itinerary planner with a spooky Halloween theme",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "python3 -m http.server 8000",
+    "dev": "live-server --port=8000",
+    "build": "echo 'No build step required - pure HTML/CSS/JS'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'",
+    "deploy": "gh-pages -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/halloween-travel-itinerary.git"
+  },
+  "keywords": [
+    "travel",
+    "itinerary",
+    "halloween",
+    "new-england",
+    "autumn",
+    "fall-foliage",
+    "planner",
+    "interactive",
+    "responsive"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/halloween-travel-itinerary/issues"
+  },
+  "homepage": "https://yourusername.github.io/halloween-travel-itinerary",
+  "devDependencies": {
+    "gh-pages": "^6.0.0",
+    "live-server": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
