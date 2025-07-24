@@ -4,621 +4,259 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎃 Halloween Travel Itinerary</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #fff8f0 0%, #ffeedd 50%, #ffaa44 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #ff6b35 0%, #d2001f 50%, #ffaa44 100%);
-            border-radius: 15px;
-            color: white;
-            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .pumpkin-row {
-            font-size: 2em;
-            margin: 10px 0;
-        }
-
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #ffcc99, #ff9966, #ffaa44);
-            padding: 10px;
-            border-radius: 10px;
-            border: 3px solid #ff6b35;
-        }
-
-        .tab-button {
-            flex: 1;
-            min-width: 80px;
-            padding: 10px 15px;
-            background: #fff;
-            border: 2px solid #ff6b35;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            color: #d2001f;
-            transition: all 0.3s ease;
-        }
-
-        .tab-button:hover {
-            background: #ff6b35;
-            color: white;
-        }
-
-        .tab-button.active {
-            background: #d2001f;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .day-content {
-            display: none;
-            background: linear-gradient(to bottom, #fff8f0, #ffeedd);
-            border: 3px solid #ff6b35;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
-        }
-
-        .day-content.active {
-            display: block;
-        }
-
-        .day-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ff6b35;
-        }
-
-        .day-title {
-            font-size: 1.8em;
-            color: #d2001f;
-            font-weight: bold;
-        }
-
-        .day-info {
-            color: #8b4513;
-            margin: 5px 0;
-        }
-
-        .edit-btn {
-            background: linear-gradient(135deg, #ff6b35, #d2001f);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .edit-btn:hover {
-            background: linear-gradient(135deg, #cc4125, #a8001a);
-        }
-
-        .activity {
-            display: flex;
-            margin: 15px 0;
-            background: linear-gradient(to right, #ffeeaa, #ffcc99);
-            border: 2px solid #ffaa44;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .activity-time {
-            background: linear-gradient(to bottom, #ff9966, #ff6b35);
-            color: white;
-            padding: 15px;
-            min-width: 80px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .activity-content {
-            padding: 15px;
-            flex: 1;
-        }
-
-        .activity-title {
-            font-weight: bold;
-            color: #8b4513;
-            margin-bottom: 5px;
-        }
-
-        .activity-description {
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        .notes {
-            margin-top: 20px;
-            padding: 15px;
-            background: #fff8f0;
-            border: 2px solid #ffaa44;
-            border-radius: 10px;
-        }
-
-        .notes h3 {
-            color: #d2001f;
-            margin-bottom: 10px;
-        }
-
-        .edit-form {
-            display: none;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #ff6b35;
-            margin-bottom: 20px;
-        }
-
-        .edit-form.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #8b4513;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            border: 2px solid #ffaa44;
-            border-radius: 5px;
-            font-family: inherit;
-        }
-
-        .form-group textarea {
-            height: 80px;
-            resize: vertical;
-        }
-
-        .save-btn {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .share-section {
-            margin-top: 30px;
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #fff8f0, #ffeedd);
-            border: 3px solid #ff6b35;
-            border-radius: 15px;
-        }
-
-        .share-code {
-            font-size: 2em;
-            font-weight: bold;
-            color: #d2001f;
-            background: white;
-            padding: 15px;
-            border: 2px solid #ff6b35;
-            border-radius: 10px;
-            margin: 15px 0;
-            letter-spacing: 3px;
-        }
-
-        @media (max-width: 600px) {
-            .tabs {
-                flex-direction: column;
-            }
-            
-            .day-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-            
-            .activity {
-                flex-direction: column;
-            }
-            
-            .activity-time {
-                min-width: auto;
-            }
-        }
-    </style>
+    <meta name="description" content="Plan your perfect Halloween New England adventure with this interactive travel itinerary">
+    <meta name="keywords" content="Halloween, travel, itinerary, New England, autumn, fall foliage">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎃</text></svg>">
 </head>
 <body>
     <div class="container">
         <!-- Header -->
-        <div class="header">
+        <header class="header">
             <div class="pumpkin-row">🎃 🍂 🍁 🎃 🍂 🍁 🎃</div>
             <h1 id="trip-title">🎃 My Halloween New England Adventure</h1>
             <p id="trip-description">A spooky 7-day journey through autumn New England</p>
+            <button class="edit-btn" onclick="editHeader()" aria-label="Edit trip information">
+                ✏️ Edit Trip Info
+            </button>
             <div class="pumpkin-row">👻 🎃 🍂 🎃 👻</div>
+        </header>
+
+        <!-- Save Notice -->
+        <div class="save-notice">
+            <h3>💾 How to Save Your Changes</h3>
+            <p><strong>Right-click → Save As → Save as HTML file</strong></p>
+            <p>Your changes will be saved in the downloaded file!</p>
         </div>
 
-        <!-- Tabs -->
-        <div class="tabs">
-            <button class="tab-button active" onclick="showDay(1)">Day 1</button>
-            <button class="tab-button" onclick="showDay(2)">Day 2</button>
-            <button class="tab-button" onclick="showDay(3)">Day 3</button>
-            <button class="tab-button" onclick="showDay(4)">Day 4</button>
-            <button class="tab-button" onclick="showDay(5)">Day 5</button>
-            <button class="tab-button" onclick="showDay(6)">Day 6</button>
-            <button class="tab-button" onclick="showDay(7)">Day 7</button>
-        </div>
+        <!-- Navigation Tabs -->
+        <nav class="tabs" role="tablist">
+            <button class="tab active" onclick="showDay(1)" role="tab" aria-selected="true" aria-controls="day-1">Day 1</button>
+            <button class="tab" onclick="showDay(2)" role="tab" aria-selected="false" aria-controls="day-2">Day 2</button>
+            <button class="tab" onclick="showDay(3)" role="tab" aria-selected="false" aria-controls="day-3">Day 3</button>
+            <button class="tab" onclick="showDay(4)" role="tab" aria-selected="false" aria-controls="day-4">Day 4</button>
+            <button class="tab" onclick="showDay(5)" role="tab" aria-selected="false" aria-controls="day-5">Day 5</button>
+            <button class="tab" onclick="showDay(6)" role="tab" aria-selected="false" aria-controls="day-6">Day 6</button>
+            <button class="tab" onclick="showDay(7)" role="tab" aria-selected="false" aria-controls="day-7">Day 7</button>
+        </nav>
 
         <!-- Day Content -->
-        <div id="day-1" class="day-content active">
-            <div class="day-header">
-                <div>
-                    <div class="day-title">🎃 Day 1: Salem Arrival</div>
-                    <div class="day-info">📍 Salem, Massachusetts</div>
-                    <div class="day-info">📅 October 25, 2024</div>
+        <main class="days-container">
+            <!-- Day 1 -->
+            <section id="day-1" class="day active" role="tabpanel" aria-labelledby="tab-1">
+                <div class="day-header">
+                    <h2 class="day-title" id="day1-title">🎃 Day 1: Salem Arrival</h2>
+                    <div class="day-info" id="day1-location">📍 Salem, Massachusetts</div>
+                    <div class="day-info" id="day1-date">📅 Friday, October 25, 2024</div>
+                    <button class="edit-btn" onclick="editDay(1)" aria-label="Edit day 1">✏️ Edit Day</button>
                 </div>
-                <button class="edit-btn" onclick="toggleEdit(1)">✏️ Edit</button>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">10:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Arrive in Salem</div>
-                    <div class="activity-description">Check into the Hawthorne Hotel - the most haunted hotel in Salem!</div>
+                <div class="activities">
+                    <div class="activity">
+                        <div class="activity-time" id="day1-act1-time">10:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title" id="day1-act1-title">🏨 Arrive in Salem</h3>
+                            <p class="activity-description" id="day1-act1-desc">Check into the Hawthorne Hotel - the most haunted hotel in Salem!</p>
+                        </div>
+                    </div>
+
+                    <div class="activity">
+                        <div class="activity-time" id="day1-act2-time">14:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title" id="day1-act2-title">🧙‍♀️ Salem Witch Museum</h3>
+                            <p class="activity-description" id="day1-act2-desc">Learn about the infamous 1692 witch trials through immersive exhibits.</p>
+                        </div>
+                    </div>
+
+                    <div class="activity">
+                        <div class="activity-time" id="day1-act3-time">19:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title" id="day1-act3-title">👻 Evening Ghost Tour</h3>
+                            <p class="activity-description" id="day1-act3-desc">Spooky walking tour through Salem's haunted streets with professional guides.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">14:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Salem Witch Museum</div>
-                    <div class="activity-description">Learn about the infamous 1692 witch trials</div>
+                <div class="notes">
+                    <h3>🗒️ Notes</h3>
+                    <p id="day1-notes">Bring a jacket for the evening ghost tour - it gets chilly in October! Don't forget your camera for spooky photos.</p>
                 </div>
-            </div>
+            </section>
 
-            <div class="activity">
-                <div class="activity-time">19:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Ghost Tour</div>
-                    <div class="activity-description">Spooky evening walking tour through Salem's haunted streets</div>
+            <!-- Day 2 -->
+            <section id="day-2" class="day" role="tabpanel" aria-labelledby="tab-2">
+                <div class="day-header">
+                    <h2 class="day-title" id="day2-title">🍂 Day 2: Boston Exploration</h2>
+                    <div class="day-info" id="day2-location">📍 Boston, Massachusetts</div>
+                    <div class="day-info" id="day2-date">📅 Saturday, October 26, 2024</div>
+                    <button class="edit-btn" onclick="editDay(2)" aria-label="Edit day 2">✏️ Edit Day</button>
                 </div>
-            </div>
 
-            <div class="notes">
-                <h3>🗒️ Notes</h3>
-                <p>Bring a jacket for the evening ghost tour - it gets chilly! Don't forget your camera for spooky photos.</p>
-            </div>
-        </div>
+                <div class="activities">
+                    <div class="activity">
+                        <div class="activity-time">09:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title">🚗 Drive to Boston</h3>
+                            <p class="activity-description">Scenic 45-minute drive through autumn foliage along Route 1A.</p>
+                        </div>
+                    </div>
 
-        <div id="day-2" class="day-content">
-            <div class="day-header">
-                <div>
-                    <div class="day-title">🍂 Day 2: Boston Exploration</div>
-                    <div class="day-info">📍 Boston, Massachusetts</div>
-                    <div class="day-info">📅 October 26, 2024</div>
+                    <div class="activity">
+                        <div class="activity-time">11:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title">🧱 Freedom Trail</h3>
+                            <p class="activity-description">Walk the historic red-brick trail through downtown Boston, visiting 16 historical sites.</p>
+                        </div>
+                    </div>
                 </div>
-                <button class="edit-btn" onclick="toggleEdit(2)">✏️ Edit</button>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">09:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Drive to Boston</div>
-                    <div class="activity-description">Scenic 45-minute drive through autumn foliage</div>
+                <div class="notes">
+                    <h3>🗒️ Notes</h3>
+                    <p>Perfect time for leaf-peeping! The maples should be at peak color. Try some New England clam chowder for lunch.</p>
                 </div>
-            </div>
+            </section>
 
-            <div class="activity">
-                <div class="activity-time">11:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Freedom Trail</div>
-                    <div class="activity-description">Walk the historic red-brick trail through downtown Boston</div>
-                </div>
-            </div>
-
-            <div class="activity">
-                <div class="activity-time">15:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Boston Common</div>
-                    <div class="activity-description">Enjoy the beautiful fall colors in America's oldest public park</div>
-                </div>
-            </div>
-
-            <div class="notes">
-                <h3>🗒️ Notes</h3>
-                <p>Perfect time for leaf-peeping! The maples should be at peak color. Try some New England clam chowder for lunch.</p>
-            </div>
-        </div>
-
-        <div id="day-3" class="day-content">
-            <div class="day-header">
-                <div>
-                    <div class="day-title">🏔️ Day 3: White Mountains</div>
+            <!-- Day 3 -->
+            <section id="day-3" class="day" role="tabpanel" aria-labelledby="tab-3">
+                <div class="day-header">
+                    <h2 class="day-title">🏔️ Day 3: White Mountains</h2>
                     <div class="day-info">📍 North Conway, New Hampshire</div>
-                    <div class="day-info">📅 October 27, 2024</div>
+                    <div class="day-info">📅 Sunday, October 27, 2024</div>
+                    <button class="edit-btn" onclick="editDay(3)" aria-label="Edit day 3">✏️ Edit Day</button>
                 </div>
-                <button class="edit-btn" onclick="toggleEdit(3)">✏️ Edit</button>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">08:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Drive to White Mountains</div>
-                    <div class="activity-description">2.5 hour scenic drive through peak foliage</div>
+                <div class="activities">
+                    <div class="activity">
+                        <div class="activity-time">08:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title">🚗 Drive to White Mountains</h3>
+                            <p class="activity-description">2.5 hour scenic drive through peak foliage via Route 16 North.</p>
+                        </div>
+                    </div>
+
+                    <div class="activity">
+                        <div class="activity-time">12:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title">🚂 Mount Washington Cog Railway</h3>
+                            <p class="activity-description">Historic train ride to the summit with spectacular 360-degree autumn views.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">12:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Mount Washington Cog Railway</div>
-                    <div class="activity-description">Historic train ride to the summit with spectacular autumn views</div>
+                <div class="notes">
+                    <h3>🗒️ Notes</h3>
+                    <p>Dress warmly - it's much colder at the summit! Bring layers and a warm hat.</p>
                 </div>
-            </div>
+            </section>
 
-            <div class="activity">
-                <div class="activity-time">18:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Pumpkin Patch Visit</div>
-                    <div class="activity-description">Pick pumpkins and enjoy hot apple cider</div>
-                </div>
-            </div>
-
-            <div class="notes">
-                <h3>🗒️ Notes</h3>
-                <p>Dress warmly - it's much colder at the summit! Bring layers and a warm hat.</p>
-            </div>
-        </div>
-
-        <!-- Continue with remaining days... -->
-        <div id="day-4" class="day-content">
-            <div class="day-header">
-                <div>
-                    <div class="day-title">🍁 Day 4: Vermont Foliage</div>
+            <!-- Day 4 -->
+            <section id="day-4" class="day" role="tabpanel" aria-labelledby="tab-4">
+                <div class="day-header">
+                    <h2 class="day-title">🍁 Day 4: Vermont Foliage</h2>
                     <div class="day-info">📍 Stowe, Vermont</div>
-                    <div class="day-info">📅 October 28, 2024</div>
+                    <div class="day-info">📅 Monday, October 28, 2024</div>
+                    <button class="edit-btn" onclick="editDay(4)" aria-label="Edit day 4">✏️ Edit Day</button>
                 </div>
-                <button class="edit-btn" onclick="toggleEdit(4)">✏️ Edit</button>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">10:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Stowe Scenic Drive</div>
-                    <div class="activity-description">Drive Route 100 - one of the most beautiful foliage routes</div>
+                <div class="activities">
+                    <div class="activity">
+                        <div class="activity-time">10:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title">🛣️ Scenic Drive Route 100</h3>
+                            <p class="activity-description">One of the most beautiful foliage routes in New England.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">14:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Maple Syrup Farm Tour</div>
-                    <div class="activity-description">Learn how maple syrup is made and taste fresh samples</div>
+                <div class="notes">
+                    <h3>🗒️ Notes</h3>
+                    <p>Buy some pure Vermont maple syrup to take home!</p>
                 </div>
-            </div>
+            </section>
 
-            <div class="notes">
-                <h3>🗒️ Notes</h3>
-                <p>Buy some pure Vermont maple syrup to take home! The sugar maples are at peak color.</p>
-            </div>
-        </div>
-
-        <div id="day-5" class="day-content">
-            <div class="day-header">
-                <div>
-                    <div class="day-title">🎃 Day 5: Halloween Prep</div>
+            <!-- Day 5 -->
+            <section id="day-5" class="day" role="tabpanel" aria-labelledby="tab-5">
+                <div class="day-header">
+                    <h2 class="day-title">🎃 Day 5: Sleepy Hollow</h2>
                     <div class="day-info">📍 Sleepy Hollow, New York</div>
-                    <div class="day-info">📅 October 29, 2024</div>
+                    <div class="day-info">📅 Tuesday, October 29, 2024</div>
+                    <button class="edit-btn" onclick="editDay(5)" aria-label="Edit day 5">✏️ Edit Day</button>
                 </div>
-                <button class="edit-btn" onclick="toggleEdit(5)">✏️ Edit</button>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">11:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Sleepy Hollow Cemetery</div>
-                    <div class="activity-description">Visit Washington Irving's grave and the Headless Horseman Bridge</div>
+                <div class="activities">
+                    <div class="activity">
+                        <div class="activity-time">11:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title">⚰️ Sleepy Hollow Cemetery</h3>
+                            <p class="activity-description">Visit Washington Irving's grave and the famous Headless Horseman Bridge.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">15:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Philipsburg Manor</div>
-                    <div class="activity-description">Historic site with special Halloween programming</div>
+                <div class="notes">
+                    <h3>🗒️ Notes</h3>
+                    <p>The Legend of Sleepy Hollow comes alive here! Perfect for Halloween eve.</p>
                 </div>
-            </div>
+            </section>
 
-            <div class="notes">
-                <h3>🗒️ Notes</h3>
-                <p>The Legend of Sleepy Hollow comes alive here! Perfect for Halloween eve.</p>
-            </div>
-        </div>
-
-        <div id="day-6" class="day-content">
-            <div class="day-header">
-                <div>
-                    <div class="day-title">👻 Day 6: Halloween!</div>
+            <!-- Day 6 -->
+            <section id="day-6" class="day" role="tabpanel" aria-labelledby="tab-6">
+                <div class="day-header">
+                    <h2 class="day-title">👻 Day 6: Halloween in Salem</h2>
                     <div class="day-info">📍 Salem, Massachusetts</div>
-                    <div class="day-info">📅 October 30, 2024</div>
+                    <div class="day-info">📅 Wednesday, October 30, 2024</div>
+                    <button class="edit-btn" onclick="editDay(6)" aria-label="Edit day 6">✏️ Edit Day</button>
                 </div>
-                <button class="edit-btn" onclick="toggleEdit(6)">✏️ Edit</button>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">12:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Return to Salem</div>
-                    <div class="activity-description">Back to Salem for the ultimate Halloween experience</div>
+                <div class="activities">
+                    <div class="activity">
+                        <div class="activity-time">18:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title">🎭 Halloween Festival</h3>
+                            <p class="activity-description">Salem's famous Halloween celebration with costumes and festivities!</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">18:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Halloween Festival</div>
-                    <div class="activity-description">Salem's famous Halloween celebration with costumes and festivities</div>
+                <div class="notes">
+                    <h3>🗒️ Notes</h3>
+                    <p>Wear your best costume! Salem goes all out for Halloween - it's magical!</p>
                 </div>
-            </div>
+            </section>
 
-            <div class="notes">
-                <h3>🗒️ Notes</h3>
-                <p>Wear your best costume! Salem goes all out for Halloween - it's magical!</p>
-            </div>
-        </div>
-
-        <div id="day-7" class="day-content">
-            <div class="day-header">
-                <div>
-                    <div class="day-title">🏠 Day 7: Departure</div>
+            <!-- Day 7 -->
+            <section id="day-7" class="day" role="tabpanel" aria-labelledby="tab-7">
+                <div class="day-header">
+                    <h2 class="day-title">🏠 Day 7: Farewell</h2>
                     <div class="day-info">📍 Salem, Massachusetts</div>
-                    <div class="day-info">📅 October 31, 2024</div>
+                    <div class="day-info">📅 Thursday, October 31, 2024 - Halloween!</div>
+                    <button class="edit-btn" onclick="editDay(7)" aria-label="Edit day 7">✏️ Edit Day</button>
                 </div>
-                <button class="edit-btn" onclick="toggleEdit(7)">✏️ Edit</button>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">10:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Final Salem Stroll</div>
-                    <div class="activity-description">Last walk through the historic streets and souvenir shopping</div>
+                <div class="activities">
+                    <div class="activity">
+                        <div class="activity-time">10:00</div>
+                        <div class="activity-content">
+                            <h3 class="activity-title">🛍️ Final Salem Stroll</h3>
+                            <p class="activity-description">Last walk through the historic streets and souvenir shopping.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="activity">
-                <div class="activity-time">14:00</div>
-                <div class="activity-content">
-                    <div class="activity-title">Departure</div>
-                    <div class="activity-description">Head home with amazing Halloween memories!</div>
+                <div class="notes">
+                    <h3>🗒️ Notes</h3>
+                    <p>Don't forget to pack all your souvenirs and take one last spooky photo! What a perfect way to end on actual Halloween! 🎃</p>
                 </div>
-            </div>
+            </section>
+        </main>
 
-            <div class="notes">
-                <h3>🗒️ Notes</h3>
-                <p>Don't forget to pack all your souvenirs and take one last spooky photo!</p>
-            </div>
-        </div>
-
-        <!-- Share Section -->
-        <div class="share-section">
-            <h2>🎃 Share This Itinerary</h2>
-            <p>Love this Halloween New England adventure? Share it with friends!</p>
-            <div class="share-code" id="share-code">SALEM24</div>
-            <p>Share this code: <strong>SALEM24</strong></p>
-            <button class="edit-btn" onclick="copyShareCode()">📋 Copy Code</button>
-        </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with 🎃 for spooky travel planning!</p>
+            <p><a href="https://github.com/yourusername/halloween-travel-itinerary" target="_blank">View on GitHub</a></p>
+        </footer>
     </div>
 
-    <script>
-        // Simple tab functionality
-        function showDay(dayNumber) {
-            // Hide all day contents
-            const allDays = document.querySelectorAll('.day-content');
-            allDays.forEach(day => day.classList.remove('active'));
-            
-            // Remove active class from all tabs
-            const allTabs = document.querySelectorAll('.tab-button');
-            allTabs.forEach(tab => tab.classList.remove('active'));
-            
-            // Show selected day
-            document.getElementById(`day-${dayNumber}`).classList.add('active');
-            
-            // Activate selected tab
-            event.target.classList.add('active');
-        }
-
-        // Simple edit functionality (placeholder)
-        function toggleEdit(dayNumber) {
-            alert(`Edit functionality for Day ${dayNumber} - This would open an edit form in a full version!`);
-        }
-
-        // Copy share code
-        function copyShareCode() {
-            const shareCode = document.getElementById('share-code').textContent;
-            
-            // Try to copy to clipboard
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(shareCode).then(() => {
-                    alert('Share code copied to clipboard!');
-                });
-            } else {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = shareCode;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('Share code copied!');
-            }
-        }
-
-        // Simple local storage save (works on most platforms)
-        function saveData() {
-            const data = {
-                title: document.getElementById('trip-title').textContent,
-                description: document.getElementById('trip-description').textContent,
-                timestamp: new Date().toISOString()
-            };
-            
-            try {
-                localStorage.setItem('halloween-itinerary', JSON.stringify(data));
-                console.log('Data saved locally');
-            } catch (e) {
-                console.log('Local storage not available');
-            }
-        }
-
-        // Load data on page load
-        window.addEventListener('load', function() {
-            try {
-                const saved = localStorage.getItem('halloween-itinerary');
-                if (saved) {
-                    const data = JSON.parse(saved);
-                    console.log('Loaded saved data:', data);
-                }
-            } catch (e) {
-                console.log('No saved data found');
-            }
-        });
-
-        // Auto-save when page unloads
-        window.addEventListener('beforeunload', saveData);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
